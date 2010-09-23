@@ -1,0 +1,145 @@
+[Term]
+id: PRO:000010173
+name: microtubule-associated protein tau
+def: "A protein that is a translation product of the MAPT gene or a 1:1 ortholog thereof." [PRO:DNx]
+comment: Category=gene.
+synonym: "neurofibrillary tangle protein" EXACT []
+synonym: "paired helical filament-tau" EXACT []
+synonym: "PHF-tau" EXACT []
+synonym: "MAPT" RELATED []
+synonym: "MAPTL" RELATED []
+synonym: "MTBT1" RELATED []
+synonym: "TAU" RELATED []
+synonym: "Mtapt" RELATED []
+is_a: PRO:000000001 ! protein
+
+[Term]
+id: PRO:000018263
+name: amino acid chain
+def: "A polymer of amino acids linked by peptide bonds." [PRO:DAN]
+synonym: "peptide" NARROW []
+synonym: "polypeptide" NARROW []
+
+[Term]
+id: MOD:00696
+name: phosphorylated residue
+
+[Term]
+id: CheBI:32958
+name: phosphate group
+
+[Typedef]
+id: has_part
+name: has_part
+
+[Typedef]
+id: lacks_part
+name: lacks_part
+
+## These probably exist somewhere else: 
+
+[Term]
+id: request_000000027
+name: protein site
+
+[Term]
+id: request_000000025
+name: Histidine
+
+[Term]
+id: request_000000041
+name: Lysine
+
+## New Terms #######################################################################################
+
+[Term]
+id: request_000000001
+name: microtubule-associated protein tau (human)
+def: "A protein that is a translation product of the human MAPT gene." 
+comment: Category=species-specific
+is_a: PRO:000010173 ! microtubule-associated protein tau
+
+[Term]
+id: request_000000002
+name: microtubule-associated protein tau (human) full-length
+is_a: request_000000001 ! microtubule-associated protein tau (human)
+comment: Canonical form
+relationship: has_part request_000000003 ! MAPT Exon Part 1
+relationship: has_part request_000000004 ! MAPT Exon Part 2
+relationship: has_part request_000000007 ! MAPT Exon Part 5
+relationship: has_part request_000000012 ! MAPT Exon Part 10
+
+[Term]
+id: request_000000018
+name: microtubule-associated protein tau (human) isoform N2 R3
+comment: Category=isoform
+is_a: request_000000001 ! microtubule-associated protein tau (human)
+relationship: lacks_part request_000000012 ! MAPT Exon Part 10
+
+[Term]
+id: request_000000019
+name: microtubule-associated protein tau (human) isoform N1 R4
+comment: Category=isoform
+is_a: request_000000001 ! microtubule-associated protein tau (human)
+relationship: lacks_part request_000000005 ! MAPT Exon Part 3
+
+[Term]
+id: request_000000000
+name: microtubule-associated protein tau (human) exon part
+def: "A part of a human microtubule-associated tau protein that is translated from a single exon of the primary transcript from the MAPT gene." 
+is_a: PRO:000018263 ! amino acid chain
+relationship: part_of request_000000001 ! microtubule-associated protein tau (human)
+
+[Term]
+id: request_000000003
+name: MAPT Exon Part 1
+def: "A part of a human microtubule-associated tau protein that is translated the part of the primary transcript that aligns to the first exon of the full-length transcript."
+is_a: request_000000000 ! microtubule-associated protein tau (human) exon part
+
+[Term]
+id: request_000000004
+name: MAPT Exon Part 2
+def: "A part of a human microtubule-associated tau protein that is translated the part of the primary transcript that aligns to the second exon of the full-length transcript."
+is_a: request_000000000 ! microtubule-associated protein tau (human) exon part
+
+[Term]
+id: request_000000009
+name: MAPT Exon Part 5 
+def: "A part of a human microtubule-associated tau protein that is translated the part of the primary transcript that aligns to the fifth exon of the full-length transcript."
+is_a: request_000000000 ! microtubule-associated protein tau (human) exon part
+
+[Term]
+id: request_000000012
+name: MAPT Exon Part 10
+def: "A part of a human microtubule-associated tau protein that is translated the part of the primary transcript that aligns to the tenth exon of the full-length transcript."
+is_a: request_000000000 ! microtubule-associated protein tau (human) exon part
+
+[Term]
+id: request_000000026
+name: Lys-257 
+def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form." 
+is_a: request_000000027 ! protein site
+relationship: has_part request_000000004 ! MAPT Exon Part 2
+
+[Term]
+id: request_000000029
+name: microtubule-associated protein tau (human) sequence variant K257T
+def: "A variant of the human microtubule-associated protein tau bearing a threonine residue at the site aligning to the 257th position of the canonical protein form." 
+comment: Category=variant
+is_a: request_000000001 ! microtubule-associated protein tau (human)
+relationship: has_part request_000000028 ! Lys-257 occupied by Histidine
+
+[Term]
+id: request_000000028
+name: Lys-257 occupied by Histidine
+def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form, and is occupied by a Histidine residue." 
+is_a: request_000000026 ! Lys-257 
+relationship: has_part request_000000025 ! Histidine
+
+[Term]
+id: request_000000042
+name: Lys-257 occupied by Lysine
+def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form, and is occupied by a Lysine residue." 
+is_a: request_000000026 ! Lys-257 
+relationship: has_part request_000000041 ! Lysine
+
