@@ -1,3 +1,5 @@
+# alanr: Note that these are already in PRO
+
 [Term]
 id: PRO:000010173
 name: microtubule-associated protein tau
@@ -14,13 +16,6 @@ synonym: "Mtapt" RELATED []
 is_a: PRO:000000001 ! protein
 
 [Term]
-id: PRO:000018263
-name: amino acid chain
-def: "A polymer of amino acids linked by peptide bonds." [PRO:DAN]
-synonym: "peptide" NARROW []
-synonym: "polypeptide" NARROW []
-
-[Term]
 id: MOD:00696
 name: phosphorylated residue
 
@@ -28,27 +23,31 @@ name: phosphorylated residue
 id: CheBI:32958
 name: phosphate group
 
-[Typedef]
-id: has_part
-name: has_part
+[Term]
+id: CheBI:27570
+name: histidine
 
-[Typedef]
-id: lacks_part
-name: lacks_part
+[Term]
+id: CheBI:25094
+name: lysine
 
-## These probably exist somewhere else: 
-
+# alanr: Give a definition
+# Maybe this should be derived from SO as well? -TWD
 [Term]
 id: request_000000027
 name: protein site
 
 [Term]
-id: request_000000025
-name: Histidine
+id: request_000000043
+name: protein exon part
+def: "A part protein that is translated from a single exon of an edited transcript derived from a single gene locus." 
+is_a: PRO:000018263 ! amino acid chain
+relationship: part_of PRO:000000001 ! protein
+relationship: derived_from SO:0000147 ! RNA exon sequence
 
 [Term]
-id: request_000000041
-name: Lysine
+id: SO:0000147
+name: RNA exon sequence
 
 ## New Terms #######################################################################################
 
@@ -56,8 +55,9 @@ name: Lysine
 id: request_000000001
 name: microtubule-associated protein tau (human)
 def: "A protein that is a translation product of the human MAPT gene." 
-comment: Category=species-specific
-is_a: PRO:000010173 ! microtubule-associated protein tau
+comment: Category=organism-gene.
+intersection_of: PRO:000010173 ! microtubule-associated protein tau
+intersection_of: only_in_taxon taxon:9606 ! Homo sapiens
 
 [Term]
 id: request_000000002
@@ -72,23 +72,25 @@ relationship: has_part request_000000012 ! MAPT Exon Part 10
 [Term]
 id: request_000000018
 name: microtubule-associated protein tau (human) isoform N2 R3
+def: "A microtubule-associated protein tau (human) isoform that lacks the 10th exon part (containing the 4th microtubule-binding domain repeat region) of the full-length form."
 comment: Category=isoform
-is_a: request_000000001 ! microtubule-associated protein tau (human)
-relationship: lacks_part request_000000012 ! MAPT Exon Part 10
+intersection_of: request_000000001 ! microtubule-associated protein tau (human)
+intersection_of: lacks_part request_000000012 ! MAPT Exon Part 10
 
 [Term]
 id: request_000000019
 name: microtubule-associated protein tau (human) isoform N1 R4
+def: "A microtubule-associated protein tau (human) isoform that lacks the 3rd exon part of the full-length form."
 comment: Category=isoform
-is_a: request_000000001 ! microtubule-associated protein tau (human)
-relationship: lacks_part request_000000005 ! MAPT Exon Part 3
+intersection_of: request_000000001 ! microtubule-associated protein tau (human)
+intersection_of: lacks_part request_000000005 ! MAPT Exon Part 3
 
 [Term]
 id: request_000000000
 name: microtubule-associated protein tau (human) exon part
 def: "A part of a human microtubule-associated tau protein that is translated from a single exon of the primary transcript from the MAPT gene." 
-is_a: PRO:000018263 ! amino acid chain
-relationship: part_of request_000000001 ! microtubule-associated protein tau (human)
+intersection_of: request_000000043 ! protein exon part
+intersection_of: part_of request_000000001 ! microtubule-associated protein tau (human)
 
 [Term]
 id: request_000000003
@@ -119,7 +121,7 @@ id: request_000000026
 name: Lys-257 
 def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form." 
 is_a: request_000000027 ! protein site
-relationship: has_part request_000000004 ! MAPT Exon Part 2
+relationship: part_of request_000000004 ! MAPT Exon Part 2
 
 [Term]
 id: request_000000029
@@ -134,12 +136,34 @@ id: request_000000028
 name: Lys-257 occupied by Histidine
 def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form, and is occupied by a Histidine residue." 
 is_a: request_000000026 ! Lys-257 
-relationship: has_part request_000000025 ! Histidine
+relationship: contains CheBI:27570 ! histidine
 
 [Term]
 id: request_000000042
 name: Lys-257 occupied by Lysine
 def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form, and is occupied by a Lysine residue." 
 is_a: request_000000026 ! Lys-257 
-relationship: has_part request_000000041 ! Lysine
+relationship: contains CheBI:25094 ! lysine
+
+## Typedefs for relationships
+
+[Typedef]
+id: has_part
+name: has_part
+
+[Typedef]
+id: only_in_taxon
+name: only_in_taxon
+
+[Typedef]
+id: lacks_part
+name: lacks_part
+
+[Typedef]
+id: contains
+name: contains
+
+[Typedef]
+id: derived_from
+name: derived_from
 
