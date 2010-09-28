@@ -1,4 +1,11 @@
-# alanr: Note that these are already in PRO
+## This first section defines some already existing terms, either
+## from PRO or from other ontologies, which we'll use to build our 
+## new terms from.
+
+## Note, in the first definition, the existing Tau definition taken from PRO,
+## both PHF tau and NFT tau are given as "exact" synonyms.  Is that really correct? 
+## It seems as if these would be more correctly listed as "related", since not all forms
+## of Tau are actually part of the PHFs or NFTs, no? 
 
 [Term]
 id: PRO:000010173
@@ -31,25 +38,67 @@ name: histidine
 id: CheBI:25094
 name: lysine
 
-# alanr: Give a definition
-# Maybe this should be derived from SO as well? -TWD
+[Term]
+id: CHEBI:32874
+name: proline residue
+
+[Term]
+id: CHEBI:32630
+name: leucine residue
+
+
+[Term]
+id: CHEBI:33708
+name: amino-acid residue
+
+[Term]
+id: SO:0001237
+name: amino_acid
+def: "A sequence feature that corresponds to a single amino acid residue in a polypeptide." 
+
+[Term]
+id: SO:0001606
+name: amino_acid_substitution
+def: "A sequence variant of a codon resulting in the substitution of one amino acid for another in the resulting polypeptide."
+
+[Term]
+id: SO:0000195
+name: coding_exon
+def: "An exon whereby at least one base is part of a codon (here, 'codon' is inclusive of the stop_codon)."
+
+
+
+## The following are examples of new terms (in other words, they are term requests)
+## -- we need them to be defined with the given relationships, or their correct equivalents,
+## either in PRO or some other ontology (SOM? MOD?) 
+
 [Term]
 id: request_000000027
 name: protein site
+def: "A site consisting of a region of a protein, defined in terms of the protein's amino acid sequence or structural features." 
+intersection_of: snap:Site ! site
+intersection_of: part_of PRO:000000001 ! protein
+
+[Typedef]
+id: templated_from_bearer_of
+name: templated_from_bearer_of
+def: "Equivalent to the concatenation of the properties templated_from, bearer_of, and is_concretization_of (in that order)."
+comment: "Using this relationship to attach protein exon parts to the corresponding parts of transcripts that bear concretizations of the corresponding SO region terms as annotations -- this relation is our attempt at a link between PRO and SO in a useful way." 
+
+[Term]
+id: request_000000031
+name: amino acid site
+def: "A protein site consisting of a region containing a single amino acid and translated from a part of a transcript bearing a concretization of the SO amino acid feature"
+intersection_of: request_000000027 ! protein site
+intersection_of: contains CHEBI:33708 ! amino-acid residue
 
 [Term]
 id: request_000000043
 name: protein exon part
-def: "A part protein that is translated from a single exon of an edited transcript derived from a single gene locus." 
-is_a: PRO:000018263 ! amino acid chain
-relationship: part_of PRO:000000001 ! protein
-relationship: derived_from SO:0000147 ! RNA exon sequence
-
-[Term]
-id: SO:0000147
-name: RNA exon sequence
-
-## New Terms #######################################################################################
+def: "A part of a protein that is an amino acid chain, and that is translated from a single exon of an edited transcript derived from a single gene locus." 
+intersection: PRO:000018263 ! amino acid chain
+intersection: part_of PRO:000000001 ! protein
+intersection: templated_from_bearer_of SO:0000195 ! coding_exon
 
 [Term]
 id: request_000000001
@@ -59,6 +108,9 @@ comment: Category=organism-gene.
 intersection_of: PRO:000010173 ! microtubule-associated protein tau
 intersection_of: only_in_taxon taxon:9606 ! Homo sapiens
 
+## The "real" definition of the isoform terms would contain has_part relationships
+## (or lacks_part) with *all* the possible exons, 1-15.  This example only expands a 
+## few of the exon parts.
 [Term]
 id: request_000000002
 name: microtubule-associated protein tau (human) full-length
@@ -118,52 +170,31 @@ is_a: request_000000000 ! microtubule-associated protein tau (human) exon part
 
 [Term]
 id: request_000000026
-name: Lys-257 
-def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form." 
+name: Pro-618 
+def: "A site on the human microtubule-associated protein tau that aligns to the 618th position of the canonical protein form." 
 is_a: request_000000027 ! protein site
-relationship: part_of request_000000004 ! MAPT Exon Part 2
+relationship: part_of request_000000012 ! MAPT Exon Part 10
 
 [Term]
 id: request_000000029
-name: microtubule-associated protein tau (human) sequence variant K257T
-def: "A variant of the human microtubule-associated protein tau bearing a threonine residue at the site aligning to the 257th position of the canonical protein form." 
+name: microtubule-associated protein tau (human) sequence variant P618L
+def: "A variant of the human microtubule-associated protein tau bearing a leucine residue at the site aligning to the 618th position of the canonical protein form." 
 comment: Category=variant
-is_a: request_000000001 ! microtubule-associated protein tau (human)
-relationship: has_part request_000000028 ! Lys-257 occupied by Histidine
+intersection_of: request_000000001 ! microtubule-associated protein tau (human)
+intersection_of: has_part request_000000028 ! Pro-618 occupied by Leucine
 
 [Term]
 id: request_000000028
-name: Lys-257 occupied by Histidine
+name: Pro-618 occupied by Leucine
 def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form, and is occupied by a Histidine residue." 
-is_a: request_000000026 ! Lys-257 
-relationship: contains CheBI:27570 ! histidine
+intersection_of: request_000000026 ! Pro-618 
+intersection_of: contains CHEBI:32630 ! leucine residue
 
 [Term]
 id: request_000000042
-name: Lys-257 occupied by Lysine
-def: "A site on the human microtubule-associated protein tau that aligns to the 257th position of the canonical protein form, and is occupied by a Lysine residue." 
-is_a: request_000000026 ! Lys-257 
-relationship: contains CheBI:25094 ! lysine
+name: Pro-618 occupied by Proline
+def: "A site on the human microtubule-associated protein tau that aligns to the 618th position of the canonical protein form, and is occupied by a proline residue." 
+intersection_of: request_000000026 ! Pro-618 
+intersection_of: contains CHEBI:32874 ! proline residue
 
-## Typedefs for relationships
-
-[Typedef]
-id: has_part
-name: has_part
-
-[Typedef]
-id: only_in_taxon
-name: only_in_taxon
-
-[Typedef]
-id: lacks_part
-name: lacks_part
-
-[Typedef]
-id: contains
-name: contains
-
-[Typedef]
-id: derived_from
-name: derived_from
 
