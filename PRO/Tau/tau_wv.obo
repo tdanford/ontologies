@@ -49,6 +49,7 @@ name: leucine residue
 
 [Term]
 id: CHEBI:33708
+
 name: amino-acid residue
 
 [Term]
@@ -66,8 +67,6 @@ id: SO:0000195
 name: coding_exon
 def: "An exon whereby at least one base is part of a codon (here, 'codon' is inclusive of the stop_codon)."
 
-
-
 ## The following are examples of new terms (in other words, they are term requests)
 ## -- we need them to be defined with the given relationships, or their correct equivalents,
 ## either in PRO or some other ontology (SOM? MOD?) 
@@ -76,6 +75,7 @@ def: "An exon whereby at least one base is part of a codon (here, 'codon' is inc
 id: request_000000027
 name: protein site
 def: "A site consisting of a region of a protein, defined in terms of the protein's amino acid sequence or structural features." 
+comment: "The following axiom should be understood to apply to protein sites: if x is a protein site, and x part_of y (a protein), and x contains z (a peptide or residue) then z part_of y. [suggested by A.R.]"
 intersection_of: snap:Site ! site
 intersection_of: part_of PRO:000000001 ! protein
 
