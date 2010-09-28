@@ -95,7 +95,7 @@ intersection_of: contains CHEBI:33708 ! amino-acid residue
 [Term]
 id: request_000000043
 name: protein exon part
-def: "A part of a protein that is an amino acid chain, and that is translated from a single exon of an edited transcript derived from a single gene locus." 
+def: "A part of a protein that is an amino acid chain, and that is translated from a single exon of an transcript derived from a single gene locus." 
 intersection: PRO:000018263 ! amino acid chain
 intersection: part_of PRO:000000001 ! protein
 intersection: templated_from_bearer_of SO:0000195 ! coding_exon
@@ -116,7 +116,6 @@ id: request_000000002
 name: microtubule-associated protein tau (human) full-length
 is_a: request_000000001 ! microtubule-associated protein tau (human)
 comment: Canonical form
-relationship: has_part request_000000003 ! MAPT Exon Part 1
 relationship: has_part request_000000004 ! MAPT Exon Part 2
 relationship: has_part request_000000007 ! MAPT Exon Part 5
 relationship: has_part request_000000012 ! MAPT Exon Part 10
@@ -143,12 +142,6 @@ name: microtubule-associated protein tau (human) exon part
 def: "A part of a human microtubule-associated tau protein that is translated from a single exon of the primary transcript from the MAPT gene." 
 intersection_of: request_000000043 ! protein exon part
 intersection_of: part_of request_000000001 ! microtubule-associated protein tau (human)
-
-[Term]
-id: request_000000003
-name: MAPT Exon Part 1
-def: "A part of a human microtubule-associated tau protein that is translated the part of the primary transcript that aligns to the first exon of the full-length transcript."
-is_a: request_000000000 ! microtubule-associated protein tau (human) exon part
 
 [Term]
 id: request_000000004
