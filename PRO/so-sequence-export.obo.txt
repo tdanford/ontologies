@@ -1,0 +1,167 @@
+[Term]
+id: SO:0000110
+name: sequence_feature
+namespace: sequence
+def: "An extent of biological sequence." [SO:ke]
+subset: SOFA
+synonym: "located sequence feature" RELATED []
+synonym: "located_sequence_feature" EXACT []
+synonym: "sequence feature" EXACT []
+
+[Term]
+id: SO:0000001
+name: region
+namespace: sequence
+def: "A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids." [SO:ke]
+subset: SOFA
+is_a: SO:0000110
+synonym: "sequence" EXACT []
+
+[Term]
+id: SO:0001411
+name: biological_region
+namespace: sequence
+def: "A region defined by its disposition to be involved in a biological process." [SO:cb]
+subset: SOFA
+is_a: SO:0000001
+synonym: "biological region" EXACT []
+
+[Term]
+id: SO:0000704
+name: gene
+namespace: sequence
+def: "A region (or regions) that includes all of the sequence elements necessary to encode a functional transcript. A gene may include regulatory regions, transcribed regions and/or other functional sequence regions." [SO:immuno_workshop]
+comment: This term is mapped to MGED. Do not obsolete without consulting MGED ontology. A gene may be considered as a unit of inheritance.
+subset: SOFA
+is_a: SO:0001411
+relationship: member_of SO:0005855
+xref: URL:http://en.wikipedia.org/wiki/Gene "wiki"
+xref: URL:http://en.wikipedia.org/wiki/Gene "wiki"
+
+[Term]
+id: SO:0005855
+name: gene_group
+namespace: sequence
+def: "A collection of related genes." [SO:ma]
+subset: SOFA
+is_a: SO:0001411
+synonym: "gene group" EXACT []
+
+[Term]
+id: SO:0000831
+name: gene_member_region
+namespace: sequence
+def: "A region of a gene." [SO:ke]
+comment: A manufactured term used to allow the parts of a gene to have an is_a path to the root.
+subset: SOFA
+is_a: SO:0001411
+relationship: member_of SO:0000704
+synonym: "gene member region" EXACT []
+
+[Term]
+id: SO:0000673
+name: transcript
+namespace: sequence
+def: "An RNA synthesized on a DNA or RNA template by an RNA polymerase." [SO:ma]
+subset: SOFA
+is_a: SO:0000831
+xref: URL:http://en.wikipedia.org/wiki/RNA "wiki"
+xref: URL:http://en.wikipedia.org/wiki/RNA "wiki"
+
+[Term]
+id: SO:0000233
+name: mature_transcript
+namespace: sequence
+def: "A transcript which has undergone the necessary modifications, if any, for its function. In eukaryotes this includes, for example, processing of introns, cleavage, base modification, and modifications to the 5' and/or the 3' ends, other than addition of bases. In bacteria functional mRNAs are usually not modified." [SO:ke]
+comment: A processed transcript cannot contain introns.
+subset: SOFA
+is_a: SO:0000673
+relationship: derives_from SO:0000185
+synonym: "mature transcript" EXACT []
+xref: URL:http://en.wikipedia.org/wiki/Mature_transcript "wiki"
+xref: URL:http://en.wikipedia.org/wiki/Mature_transcript "wiki"
+
+[Term]
+id: SO:0000234
+name: mRNA
+namespace: sequence
+def: "Messenger RNA is the intermediate molecule between DNA and protein. It includes UTR and coding sequences. It does not contain introns." [SO:ma]
+comment: An mRNA does not contain introns as it is a processed_transcript. The equivalent kind of primary_transcript is protein_coding_primary_transcript (SO:0000120) which may contain introns. This term is mapped to MGED. Do not obsolete without consulting MGED ontology.
+subset: SOFA
+is_a: SO:0000233
+synonym: "messenger RNA" EXACT []
+xref: URL:http://en.wikipedia.org/wiki/MRNA "wiki"
+xref: URL:http://en.wikipedia.org/wiki/MRNA "wiki"
+
+[Term]
+id: SO:0000836
+name: mRNA_region
+namespace: sequence
+def: "A region of an mRNA." [SO:cb]
+comment: This term was added to provide a grouping term for the region parts of mRNA, thus giving them an is_a path back to the root.
+subset: SOFA
+is_a: SO:0000834
+relationship: part_of SO:0000234
+synonym: "mRNA region" EXACT []
+
+[Term]
+id: SO:0000316
+name: CDS
+namespace: sequence
+def: "A contiguous sequence which begins with, and includes, a start codon and ends with, and includes, a stop codon." [SO:ma]
+subset: SOFA
+is_a: SO:0000836
+synonym: "coding sequence" EXACT []
+
+[Term]
+id: SO:0000185
+name: primary_transcript
+namespace: sequence
+def: "A transcript that in its initial state requires modification to be functional." [SO:ma]
+subset: SOFA
+is_a: SO:0000673
+synonym: "precursor RNA" EXACT []
+synonym: "primary transcript" EXACT []
+xref: URL:http://en.wikipedia.org/wiki/Primary_transcript "wiki"
+xref: URL:http://en.wikipedia.org/wiki/Primary_transcript "wiki"
+
+[Term]
+id: SO:0000104
+name: polypeptide
+alt_id: SO:0000358
+alt_id: SO:0000358
+namespace: sequence
+def: "A sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure and may not be liable to irreversible denaturation." [SO:ma]
+comment: This term is mapped to MGED. Do not obsolete without consulting MGED ontology. The term 'protein' was merged with 'polypeptide'. Although 'protein' was a sequence_attribute and therefore meant to describe the quality rather than an actual feature, it was being used erroneously. It is replaced by 'peptidyl' as the polymer attribute.
+subset: SOFA
+is_a: SO:0001411
+relationship: derives_from SO:0000316
+synonym: "protein" EXACT []
+synonym: "SO:0000358" ALT_ID []
+synonym: "SO:0000358" ALT_ID []
+xref: URL:http://en.wikipedia.org/wiki/Polypeptide "wiki"
+xref: URL:http://en.wikipedia.org/wiki/Polypeptide "wiki"
+
+[Term]
+id: SO:0000833
+name: transcript_region
+namespace: sequence
+def: "A region of a transcript." [SO:ke]
+comment: This term was added to provide a grouping term for the region parts of transcript, thus giving them an is_a path back to the root.
+subset: SOFA
+is_a: SO:0001411
+relationship: part_of SO:0000673
+synonym: "transcript region" EXACT []
+
+[Term]
+id: SO:0000834
+name: mature_transcript_region
+namespace: sequence
+def: "A region of a mature transcript." [SO:ke]
+comment: A manufactured term to collect together the parts of a mature transcript and give them an is_a path to the root.
+subset: SOFA
+is_a: SO:0000833
+synonym: "mature transcript region" EXACT []
+
+Content-Type: text/plain; charset=ISO-8859-1
+

@@ -46,10 +46,8 @@ name: proline residue
 id: CHEBI:32630
 name: leucine residue
 
-
 [Term]
 id: CHEBI:33708
-
 name: amino-acid residue
 
 [Term]
@@ -61,6 +59,34 @@ def: "A sequence feature that corresponds to a single amino acid residue in a po
 id: SO:0001606
 name: amino_acid_substitution
 def: "A sequence variant of a codon resulting in the substitution of one amino acid for another in the resulting polypeptide."
+
+# Imported from SO
+[Term]
+id: SO:0001411
+name: biological_region
+namespace: sequence
+def: "A region defined by its disposition to be involved in a biological process." [SO:cb]
+subset: SOFA
+is_a: SO:0000001
+synonym: "biological region" EXACT []
+
+## Imported from SO
+[Term]
+id: SO:0000104
+name: polypeptide
+alt_id: SO:0000358
+alt_id: SO:0000358
+namespace: sequence
+def: "A sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure and may not be liable to irreversible denaturation." [SO:ma]
+comment: This term is mapped to MGED. Do not obsolete without consulting MGED ontology. The term 'protein' was merged with 'polypeptide'. Although 'protein' was a sequence_attribute and therefore meant to describe the quality rather than an actual feature, it was being used erroneously. It is replaced by 'peptidyl' as the polymer attribute.
+subset: SOFA
+is_a: SO:0001411
+relationship: derives_from SO:0000316
+synonym: "protein" EXACT []
+synonym: "SO:0000358" ALT_ID []
+synonym: "SO:0000358" ALT_ID []
+xref: URL:http://en.wikipedia.org/wiki/Polypeptide "wiki"
+xref: URL:http://en.wikipedia.org/wiki/Polypeptide "wiki"
 
 [Term]
 id: SO:0000195
@@ -108,14 +134,50 @@ comment: Category=organism-gene.
 intersection_of: PRO:000010173 ! microtubule-associated protein tau
 intersection_of: only_in_taxon taxon:9606 ! Homo sapiens
 
-## The "real" definition of the isoform terms would contain has_part relationships
-## (or lacks_part) with *all* the possible exons, 1-15.  This example only expands a 
-## few of the exon parts.
+[Term]
+id: IAO:0000030
+name: information content entity
+
+[Typedef]
+id: concretization_inheres_in
+equivalent_to_chain: has_concretization inheres_in
+
+[Typedef]
+id: concretization_inheres_in_bearer_of
+equivalent_to_chain: has_concretization inheres_in bearer_of
+
+[Typedef]
+id: bearer_of_concretization_of
+equivalent_to_chain: bearer_of concretization_of
+
+[Term]
+id: request_000000044
+name: sequence content entity
+def: "An information content entity whose concretizations are sequences of letters, and that designates a class of biological molecules by virtue of a one-to-one or a one-to-many matching between the letters of this information entity and the elements of the biological sequence that inheres in the molecules of the class."
+intersection_of: IAO:0000030 ! information content entity
+intersection_of: concretization_inheres_in_bearer_of SO:0001411 ! biological_region
+
+[Term]
+id: request_000000047
+name: protein sequence content entity
+def: "A sequence content entity whose concretizations are sequences of letters designating single amino acids, or sets of amino acids (ambiguity codes), and that designates a class of proteins in which inhere concretizations of a polypeptide sequence whose elements match the letters of this information entity." 
+intersection_of: request_000000044 ! sequence content entity
+intersection_of: concretization_inheres_in_bearer_of SO:0000104 ! polypeptide
+
+[Term]
+id: request_000000045
+name: microtubule-associated protein tau (human) canonical sequence
+def: "A protein sequence content entity whose concretizations inhere in the full-length (fetal) forms of human microtubule-associated protein tau (MAPT) protein, and which provides a coordinate system against which isoform sequence features and protein variations are measured."
+comment: "This could be defined by giving the *actual* canonical sequence of Human Tau."
+is_a: request_000000047 ! protein sequence content entity
+relationship: concretization_inheres_in request_000000001 ! microtubule-associated protein tau (human)
+
 [Term]
 id: request_000000002
-name: microtubule-associated protein tau (human) full-length
-is_a: request_000000001 ! microtubule-associated protein tau (human)
-comment: Canonical form
+name: microtubule-associated protein tau (human) full-length form
+intersection_of: request_000000001 ! microtubule-associated protein tau (human)
+intersection_of: bearer_of_concretization_of request_000000045 ! microtubule-associated protein tau (human) canonical sequence
+comment: "These has_part relationships are still incomplete."
 relationship: has_part request_000000004 ! MAPT Exon Part 2
 relationship: has_part request_000000007 ! MAPT Exon Part 5
 relationship: has_part request_000000012 ! MAPT Exon Part 10
