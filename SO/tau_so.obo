@@ -1,0 +1,53 @@
+[Typedef]
+id: has_protein_sequence
+name: has_protein_sequence
+def: 'has_protein_sequence' holds between a protein and the concrete sequence entity that denotes the sequence of the protein.
+comment: Could represent this relation as the chain of 'denotes', 'has_concretization', and 'inheres_in', for a subset of the SO sequence region terms.
+
+[Typedef]
+id: is_protein_sequence_of
+name: is_protein_sequence_of
+def: inv(has_protein_sequence)
+
+[Term]
+id: SEQ:0001
+name: concrete sequence entity
+is_a: IAO:0000030 ! information content entity
+
+[Term]
+id: SEQ:0002
+name: microtubule-associated protein tau (human) canonical sequence
+def: The canonical sequence of the MAPT (tau) protein in humans, defined as part of the Uniprot entry P10636.
+relationship: part_of Uniprot:P10636
+is_a: SEQ:0001 ! concrete sequence entity
+
+[Term]
+id: ALIGN:0001
+name: concrete sequence alignment
+def: An information content entity which is an alignment of two or more concrete sequences, produced as part of the output of a sequence alignment process. A sequence alignment is itself a sequence of 'sequence alignment columns,' each of which carries either a single letter from one of the concrete sequences that participated in the alignment process, or a 'gap' character.  
+is_a: IAO:0000030 ! information content entity
+
+
+# C = a particular canonical sequences for Tau.
+# 
+# A = "class of protein alignments" 
+# inA = "relates protein sequences to alignments"
+# score = "relates alignments to scores" 
+# 
+# A_C = \exists inv(inA) . C 
+# An_C = A_C and \exists score . <n
+# S_C = \exists inA . Ak_C ( for some constant 'k' ) 
+# P_C = \exists has_sequence . S_C 
+# 
+# we assert that PRO:Tau \in P_C (upper bounding it!) 
+# 
+# Now work through with alignment parts.
+# 
+# Alan suggests: 
+# 
+# CPIE ("concrete protein information entity") 
+# 
+# has_sequence : CPIE -> protein
+# 
+# CPIE \in \exists denotes . ('biological sequence' and \exists (has_concretization o inheres_in) . protein) 
+# 

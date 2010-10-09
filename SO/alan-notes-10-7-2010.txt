@@ -1,0 +1,27 @@
+R : connects protein sequences to protein molecules that exist and bear them.
+
+R is "has_sequence"^-1
+
+C = a particular canonical sequences for Tau.
+
+A = "class of protein alignments" 
+inA = "relates protein sequences to alignments"
+score = "relates alignments to scores" 
+
+A_C = \exists inv(inA) . C 
+An_C = A_C and \exists score . <n
+S_C = \exists inA . Ak_C ( for some constant 'k' ) 
+P_C = \exists has_sequence . S_C 
+
+we assert that PRO:Tau \in P_C (upper bounding it!) 
+
+Now work through with alignment parts.
+
+Alan suggests: 
+
+CPIE ("concrete protein information entity") 
+
+has_sequence : CPIE -> protein
+
+CPIE \in \exists denotes . ('biological sequence' and \exists (has_concretization o inheres_in) . protein) 
+
