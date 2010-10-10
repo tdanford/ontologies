@@ -1,13 +1,13 @@
 [Typedef]
 id: has_protein_sequence
 name: has_protein_sequence
-def: 'has_protein_sequence' holds between a protein and the concrete sequence entity that denotes the sequence of the protein.
-comment: Could represent this relation as the chain of 'denotes', 'has_concretization', and 'inheres_in', for a subset of the SO sequence region terms.
+def: "A relationship that holds between a protein and the concrete sequence entity that denotes the sequence of the protein."
+comment: "Could represent this relation as the chain of 'denotes', 'has_concretization', and 'inheres_in', for a subset of the SO sequence region terms."
 
 [Typedef]
 id: is_protein_sequence_of
 name: is_protein_sequence_of
-def: inv(has_protein_sequence)
+def: "inv(has_protein_sequence)"
 
 [Term]
 id: SEQ:0001
@@ -17,21 +17,60 @@ is_a: IAO:0000030 ! information content entity
 [Term]
 id: SEQ:0002
 name: microtubule-associated protein tau (human) canonical sequence
-def: The canonical sequence of the MAPT (tau) protein in humans, defined as part of the Uniprot entry P10636.
+def: "The canonical sequence of the MAPT (tau) protein in humans, defined as part of the Uniprot entry P10636."
 relationship: part_of Uniprot:P10636
 is_a: SEQ:0001 ! concrete sequence entity
 
 [Term]
 id: ALIGN:0001
 name: concrete sequence alignment
-def: An information content entity which is an alignment of two or more concrete sequences, produced as part of the output of a sequence alignment process. A sequence alignment is itself a sequence of 'sequence alignment columns,' each of which carries either a single letter from one of the concrete sequences that participated in the alignment process, or a 'gap' character.  
+def: "An information content entity consisting of the global alignment of two or more concrete sequences, produced as the output of a global sequence alignment process."
+comment: "A sequence alignment is itself a sequence of 'sequence alignment columns,' each of which carries either a single letter from one of the concrete sequences that participated in the alignment process, or a 'gap' character."
 is_a: IAO:0000030 ! information content entity
 
+[Typedef]
+id: has_alignment_score
+name: has_alignment_score
+def: "Relationship that holds between a concrete sequence alignment, and the information content entity that denotes its alignment 'score', the quality of the alignment."
 
-# C = a particular canonical sequences for Tau.
-# 
-# A = "class of protein alignments" 
-# inA = "relates protein sequences to alignments"
+[Typedef]
+id: in_alignment
+name: in_alignment
+def: "Relationship that holds between a concrete sequence and a global alignment of that concrete sequence."
+
+[Term]
+id: ALIGN:0004
+name: High-quality score 
+def: "Alignment scores under a certain threshold N."
+
+[Typedef]
+id: has_aligned_sequence
+name: has_aligned_sequence
+def: inv(in_alignment)
+
+[Term]
+id: ALIGN:0002
+name: MAPT sequence alignment
+intersection_of: ALIGN:0001 ! concrete sequence alignment
+intersection_of: has_aligned_sequence SEQ:0002 ! microtubule-associated protein tau (human) canonical sequence
+
+[Term]
+id: ALIGN:0003
+name: High-quality MAPT sequence alignments
+intersection_of: ALIGN:0002 ! MAPT sequence alignment
+intersection_of: has_alignment_score ALIGN:0004 ! High-quality score
+
+[Term]
+id: ALIGN:0005
+name: Canonical MAPT cluster sequence
+intersection_of: SEQ:0001 ! concrete sequence entity
+intersection_of: in_alignment ALIGN:0003 ! High-quality MAPT sequence alignments
+
+The following line should be added to the definition of 'microtubule-associated protein tau (human)'
+...
+relationship: has_sequence ALIGN:0005 ! Canonical MAPT cluster sequence
+...
+
 # score = "relates alignments to scores" 
 # 
 # A_C = \exists inv(inA) . C 
