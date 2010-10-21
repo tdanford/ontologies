@@ -8,6 +8,17 @@ comment: "Could represent this relation as the chain of 'denotes', 'has_concreti
 id: is_protein_sequence_of
 name: is_protein_sequence_of
 def: "inv(has_protein_sequence)"
+inverse_of: has_protein_sequence
+
+[Typedef]
+id: GDC_has_part
+name: GDC_has_part
+equivalent_to_chain: has_concretization inheres_in has_part bearer_of is_concretization_of
+
+[Typedef]
+id: GDC_part_of
+name: GDC_part_of
+inverse_of: GDC_has_part
 
 [Term]
 id: SEQ:0001
@@ -18,8 +29,11 @@ is_a: IAO:0000030 ! information content entity
 id: SEQ:0002
 name: microtubule-associated protein tau (human) canonical sequence
 def: "The canonical sequence of the MAPT (tau) protein in humans, defined as part of the Uniprot entry P10636."
-relationship: part_of Uniprot:P10636
 is_a: SEQ:0001 ! concrete sequence entity
+
+[Term]
+id: Uniprot:P10636
+relationship: GDC_has_part SEQ:0002 ! microtubule-associated protein tau (human) canonical sequence
 
 [Term]
 id: ALIGN:0001
@@ -46,7 +60,7 @@ def: "Alignment scores under a certain threshold N."
 [Typedef]
 id: has_aligned_sequence
 name: has_aligned_sequence
-def: inv(in_alignment)
+inverse_of: in_alignment
 
 [Term]
 id: ALIGN:0002
