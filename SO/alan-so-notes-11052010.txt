@@ -1,0 +1,15 @@
+1. fix the comment to has_protein_sequence
+2. concrete sequence entity needs a definition
+3. "canonical sequence" should be defined or removed? 
+4. define 'global sequence alignment' -- every one of these is the specified output of one of those.
+5. replace 'sequence' with 'ordered list' in the alignment def. 
+"one" -> each -- each column carries a letter from *each* sequence, or a gap character.
+- each column contributes a score to the alignment according to a matrix.
+- the score is also an output of the global sequence alignment process
+6. add domains and ranges to propertys
+7. change "quality" to ... something descriptive.
+8. specify inputs and outputs of the global sequence alignment.  
+9. editor note to high-quality sequence: "placeholder, not good." 
+
+10. show how to use it in tau?
+

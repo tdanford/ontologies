@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY SO "http://purl.org/obo/owl/SO#" >
+    <!ENTITY PRO "http://purl.org/obo/owl/PRO#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY CHEBI "http://purl.org/obo/owl/CHEBI#" >
+    <!ENTITY obo "http://purl.obolibrary.org/obo/" >
+    <!ENTITY uniprot "http://www.uniprot.org/uniprot/" >
+    <!ENTITY OBO_REL "http://purl.org/obo/owl/OBO_REL#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY oboInOwl "http://www.geneontology.org/formats/oboInOwl#" >
+    <!ENTITY alignments "http://purl.org/tdanford/2010/10/9/alignments.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://purl.org/tdanford/2010/10/9/alignments.owl#"
+     xml:base="http://purl.org/tdanford/2010/10/9/alignments.owl"
+     xmlns:SO="http://purl.org/obo/owl/SO#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:alignments="http://purl.org/tdanford/2010/10/9/alignments.owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:CHEBI="http://purl.org/obo/owl/CHEBI#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:PRO="http://purl.org/obo/owl/PRO#"
+     xmlns:OBO_REL="http://purl.org/obo/owl/OBO_REL#"
+     xmlns:oboInOwl="http://www.geneontology.org/formats/oboInOwl#"
+     xmlns:uniprot="http://www.uniprot.org/uniprot/">
+    <owl:Ontology rdf:about="">
+        <owl:imports rdf:resource="&obo;iao/dev/iao-dev.owl"/>
+        <owl:imports rdf:resource="&obo;iao/dev/ontology-metadata.owl"/>
+        <owl:imports rdf:resource="&obo;obi.owl"/>
+        <owl:imports rdf:resource="http://purl.org/obo/owl/sequence"/>
+        <!-- <owl:imports rdf:resource="http://purl.org/obo/owl/protein"/> -->
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&obo;IAO_0000116"/>
+    <owl:AnnotationProperty rdf:about="&oboInOwl;hasURI"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000219 -->
+
+    <owl:ObjectProperty rdf:about="&obo;IAO_0000219"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000293 -->
+
+    <owl:ObjectProperty rdf:about="&obo;OBI_0000293"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000299 -->
+
+    <owl:ObjectProperty rdf:about="&obo;OBI_0000299"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000312 -->
+
+    <owl:ObjectProperty rdf:about="&obo;OBI_0000312"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/OBO_REL#part_of -->
+
+    <owl:ObjectProperty rdf:about="&OBO_REL;part_of"/>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#has_aligned_sequence -->
+
+    <owl:ObjectProperty rdf:about="#has_aligned_sequence">
+        <rdfs:label xml:lang="en"
+            >has_aligned_sequence</rdfs:label>
+        <owl:inverseOf rdf:resource="#in_alignment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#in_alignment -->
+
+    <owl:ObjectProperty rdf:about="#in_alignment">
+        <rdfs:label xml:lang="en">in_alignment</rdfs:label>
+        <rdfs:range rdf:resource="#ALIGN_0001"/>
+        <rdfs:domain rdf:resource="#seq_0001"/>
+        <rdfs:isDefinedBy rdf:resource="#temp006"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp001 -->
+
+    <owl:ObjectProperty rdf:about="#temp001">
+        <rdfs:label xml:lang="en"
+            >has_protein_sequence</rdfs:label>
+        <obo:IAO_0000116 xml:lang="en"
+            >Could represent this relation as the chain of &#39;denotes&#39;, &#39;has_concretization&#39;, and &#39;inheres_in&#39;, for a subset of the SO sequence region terms.</obo:IAO_0000116>
+        <rdfs:range rdf:resource="&CHEBI;CHEBI_16670"/>
+        <rdfs:domain rdf:resource="#seq_0001"/>
+        <rdfs:isDefinedBy rdf:resource="#temp002"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#has_alignment_score -->
+
+    <owl:DatatypeProperty rdf:about="#has_alignment_score">
+        <rdfs:label xml:lang="en"
+            >has_alignment_score</rdfs:label>
+        <rdfs:domain rdf:resource="#ALIGN_0001"/>
+        <rdfs:isDefinedBy rdf:resource="#has_protein_sequence"/>
+        <rdfs:range rdf:resource="&xsd;double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000030 -->
+
+    <owl:Class rdf:about="&obo;IAO_0000030"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000011 -->
+
+    <owl:Class rdf:about="&obo;OBI_0000011"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/CHEBI#CHEBI_16670 -->
+
+    <owl:Class rdf:about="&CHEBI;CHEBI_16670"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/PRO#PRO_000010173 -->
+
+    <owl:Class rdf:about="&PRO;PRO_000010173">
+        <rdfs:label xml:lang="en"
+            >microtubule-associated protein tau</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#temp001"/>
+                <owl:someValuesFrom rdf:resource="#ALIGN_0005"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/obo/owl/SO#SO_0001411 -->
+
+    <owl:Class rdf:about="&SO;SO_0001411"/>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0001 -->
+
+    <owl:Class rdf:about="#ALIGN_0001">
+        <rdfs:label xml:lang="en"
+            >concrete sequence alignment</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&obo;IAO_0000030"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#has_alignment_score"/>
+                <owl:someValuesFrom rdf:resource="&xsd;double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo;OBI_0000312"/>
+                <owl:someValuesFrom rdf:resource="#temp007"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en"
+            >A sequence alignment is itself a ordered list of &#39;sequence alignment columns,&#39; each of which carries either a single letter from one of the concrete sequences that participated in the alignment process, or a &#39;gap&#39; character.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="#temp005"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0002 -->
+
+    <owl:Class rdf:about="#ALIGN_0002">
+        <rdfs:label xml:lang="en"
+            >human MAPT sequence alignment</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#has_aligned_sequence"/>
+                <owl:someValuesFrom rdf:resource="#SEQ_0002"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#ALIGN_0001"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0003 -->
+
+    <owl:Class rdf:about="#ALIGN_0003">
+        <rdfs:label xml:lang="en"
+            >High-quality human MAPT sequence alignments</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#ALIGN_0002"/>
+        <obo:IAO_0000116 xml:lang="en"
+            >&#39;High-quality&#39; is bad, I know -- I want to be able to do greater-than or less-than comparisons on sets of literals (numbers), but I don&#39;t know how to do that in OWL.  -tdanford 11/5/10</obo:IAO_0000116>
+        <rdfs:isDefinedBy rdf:resource="#temp009"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0005 -->
+
+    <owl:Class rdf:about="#ALIGN_0005">
+        <rdfs:label xml:lang="en"
+            >High-quality MAPT alignable sequence cluster</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#in_alignment"/>
+                <owl:someValuesFrom rdf:resource="#ALIGN_0003"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#seq_0001"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#SEQ_0002 -->
+
+    <owl:Class rdf:about="#SEQ_0002">
+        <rdfs:label xml:lang="en"
+            >microtubule-associated protein tau (human) canonical sequence</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#seq_0001"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&OBO_REL;part_of"/>
+                <owl:hasValue rdf:resource="&uniprot;P10636"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <obo:IAO_0000116 xml:lang="en"
+            >Why is this a class, and not an individual? The short answer: it was adapted from an OBO [Term].  The slightly longer answer: I&#39;m concerned about versioning of &#39;canonical sequences&#39;.  If the canonical sequence of Tau changed (unlikely, but it could happen), then both versions would be represented by different individuals of this class.  Both individuals would be parts of the same Uniprot entry (at different times, of course).</obo:IAO_0000116>
+        <rdfs:isDefinedBy rdf:resource="#temp004"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#seq_0001 -->
+
+    <owl:Class rdf:about="#seq_0001">
+        <rdfs:label xml:lang="en"
+            >concrete sequence entity</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&obo;IAO_0000030"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo;IAO_0000219"/>
+                <owl:allValuesFrom rdf:resource="&SO;SO_0001411"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="#temp003"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp007 -->
+
+    <owl:Class rdf:about="#temp007">
+        <rdfs:label xml:lang="en"
+            >sequence alignment process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&obo;OBI_0000011"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo;OBI_0000299"/>
+                <owl:someValuesFrom rdf:resource="#ALIGN_0001"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo;OBI_0000293"/>
+                <owl:onClass rdf:resource="#seq_0001"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="#temp008"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#has_protein_sequence -->
+
+    <owl:Thing rdf:about="#has_protein_sequence">
+        <rdfs:label xml:lang="en"
+            >Relationship that holds between a concrete sequence alignment, and the information content entity that denotes its alignment &#39;score&#39;, the quality of the alignment.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp002 -->
+
+    <owl:Thing rdf:about="#temp002">
+        <rdfs:label xml:lang="en"
+            >A relationship that holds between a protein and the concrete sequence entity that denotes the sequence of the protein.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp003 -->
+
+    <owl:Thing rdf:about="#temp003">
+        <rdfs:label xml:lang="en"
+            >An information content entity which is a ordered list of letters, each letter denoting a class of monomer (e.g. nucleotide, amino acid) in a biopolymer, and which collectively denotes a sequence of these monomers which inheres in a biological molecule.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp004 -->
+
+    <owl:Thing rdf:about="#temp004">
+        <rdfs:label xml:lang="en"
+            >The canonical sequence of the MAPT (tau) protein in humans, defined as part of the Uniprot entry P10636, and beginning &quot;MAEPRQEFEVMEDHAGTYGLGDRKDQGGYTMHQDQEGDTDAGLKESPLQT...&quot;</rdfs:label>
+        <oboInOwl:hasURI
+            >http://www.uniprot.org/uniprot/P10636#P10636-1</oboInOwl:hasURI>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp005 -->
+
+    <owl:Thing rdf:about="#temp005">
+        <rdfs:label xml:lang="en"
+            >An information content entity consisting of the global alignment of two or more concrete sequences, produced as the output of a global sequence alignment process.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp006 -->
+
+    <owl:Thing rdf:about="#temp006">
+        <rdfs:label xml:lang="en"
+            >An instance-level relationship that holds between a concrete sequences and global alignments of that concrete sequence.  &quot;X in_alignment Y&quot; is equivalent to asserting that X is in the class &quot;is_specified_input_of some (&#39;sequence alignment process&#39; and has_specified_output value Y)&quot;.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp008 -->
+
+    <owl:Thing rdf:about="#temp008">
+        <rdfs:label xml:lang="en"
+            >A planned process whose specified input is two or more concrete sequence entities, and whose specified output is an alignment of those entities.  Each alignment contains a ordered list of columns, where each column is a vector whose elements are either parts of the input concrete sequences, or a &#39;gap&#39; character.  If a character from the input sequences is represented in a column of the alignment, it appears exactly once and in the order in which it originally appeared in the input sequence (possibly with additional gaps).  The alignment is determined by an optimization process which may, itself, depend on parameters such as penalties for mismatching columns or &#39;gap penalties.&#39;  The alignment process may be &#39;global&#39;, in which case every element of the original sequences appears in some column of the output alignment, or &#39;local&#39;, where only some elements of the input sequences appear in the output alignment.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp009 -->
+
+    <owl:Thing rdf:about="#temp009">
+        <rdfs:label xml:lang="en"
+            >A &#39;high-quality&#39; alignment of human MAPT is an alignment whose score passes a minimum threshold defined by [uniprot? someone else?]</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.uniprot.org/uniprot/P10636 -->
+
+    <owl:Thing rdf:about="&uniprot;P10636">
+        <rdf:type rdf:resource="&obo;IAO_0000030"/>
+        <rdfs:comment xml:lang="en"
+            >The Uniprot entry, P10636, for human MAPT (microtubule-associated protein tau).</rdfs:comment>
+    </owl:Thing>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+
