@@ -3,14 +3,18 @@
 
 <!DOCTYPE rdf:RDF [
     <!ENTITY SO "http://purl.org/obo/owl/SO#" >
+    <!ENTITY obo2 "http://purl.org/obo/owl/obo#" >
     <!ENTITY PRO "http://purl.org/obo/owl/PRO#" >
+    <!ENTITY PATO "http://purl.org/obo/owl/PATO#" >
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
     <!ENTITY CHEBI "http://purl.org/obo/owl/CHEBI#" >
     <!ENTITY obo "http://purl.obolibrary.org/obo/" >
     <!ENTITY uniprot "http://www.uniprot.org/uniprot/" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
     <!ENTITY OBO_REL "http://purl.org/obo/owl/OBO_REL#" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY snap "http://www.ifomis.org/bfo/1.1/snap#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
     <!ENTITY oboInOwl "http://www.geneontology.org/formats/oboInOwl#" >
@@ -20,25 +24,31 @@
 
 <rdf:RDF xmlns="http://purl.org/tdanford/2010/10/9/alignments.owl#"
      xml:base="http://purl.org/tdanford/2010/10/9/alignments.owl"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:PATO="http://purl.org/obo/owl/PATO#"
+     xmlns:snap="http://www.ifomis.org/bfo/1.1/snap#"
      xmlns:SO="http://purl.org/obo/owl/SO#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:obo2="http://purl.org/obo/owl/obo#"
      xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
      xmlns:alignments="http://purl.org/tdanford/2010/10/9/alignments.owl#"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:CHEBI="http://purl.org/obo/owl/CHEBI#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:CHEBI="http://purl.org/obo/owl/CHEBI#"
      xmlns:PRO="http://purl.org/obo/owl/PRO#"
      xmlns:OBO_REL="http://purl.org/obo/owl/OBO_REL#"
      xmlns:oboInOwl="http://www.geneontology.org/formats/oboInOwl#"
      xmlns:uniprot="http://www.uniprot.org/uniprot/">
     <owl:Ontology rdf:about="">
+        <dc:creator>Timothy Danford</dc:creator>
+        <dc:description xml:lang="en"
+            >An extension to the Sequence Ontology (SO), intended to capture the annotation of text sequences, their alignment with each other, their correspondence to biological sequences, and their representation of sequence variation.</dc:description>
         <owl:imports rdf:resource="&obo;iao/dev/iao-dev.owl"/>
         <owl:imports rdf:resource="&obo;iao/dev/ontology-metadata.owl"/>
         <owl:imports rdf:resource="&obo;obi.owl"/>
         <owl:imports rdf:resource="http://purl.org/obo/owl/sequence"/>
-        <!-- <owl:imports rdf:resource="http://purl.org/obo/owl/protein"/> -->
     </owl:Ontology>
     
 
@@ -51,8 +61,12 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <owl:AnnotationProperty rdf:about="&oboInOwl;hasDefinition"/>
     <owl:AnnotationProperty rdf:about="&obo;IAO_0000116"/>
+    <owl:AnnotationProperty rdf:about="&obo;IAO_0000115"/>
+    <owl:AnnotationProperty rdf:about="&dc;description"/>
     <owl:AnnotationProperty rdf:about="&oboInOwl;hasURI"/>
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
     
 
 
@@ -79,6 +93,12 @@
     
 
 
+    <!-- http://purl.obolibrary.org/obo/OBI_0000294 -->
+
+    <owl:ObjectProperty rdf:about="&obo;OBI_0000294"/>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/OBI_0000299 -->
 
     <owl:ObjectProperty rdf:about="&obo;OBI_0000299"/>
@@ -91,9 +111,142 @@
     
 
 
+    <!-- http://purl.org/obo/owl/OBO_REL#bearer_of -->
+
+    <owl:ObjectProperty rdf:about="&OBO_REL;bearer_of"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/OBO_REL#inheres_in -->
+
+    <owl:ObjectProperty rdf:about="&OBO_REL;inheres_in"/>
+    
+
+
     <!-- http://purl.org/obo/owl/OBO_REL#part_of -->
 
     <owl:ObjectProperty rdf:about="&OBO_REL;part_of"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/obo#contains -->
+
+    <owl:ObjectProperty rdf:about="&obo2;contains"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/obo#has_part -->
+
+    <owl:ObjectProperty rdf:about="&obo2;has_part"/>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0006 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0006">
+        <rdfs:label xml:lang="en">is_locus_of</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >The initial &quot;part_of&quot; and final &quot;has_part&quot; are actually a really important components of the definition of is_locus_of.  We can&#39;t define loci based on what their contents align to, since the contents may be &quot;changed&quot; (relative to some &quot;original&quot; sequence)!  Instead, we have to assume that the locus site is *part_of* some larger locus, which itself contains a (fiat part) of a molecule whose sequence has a concrete representation that aligns with a concrete &#39;reference&#39; sequence that itself has_part the concrete sequence we&#39;re trying to pick out.</rdfs:comment>
+        <rdfs:range rdf:resource="#seq_0001"/>
+        <rdfs:isDefinedBy rdf:resource="#temp_011"/>
+        <rdfs:domain rdf:resource="&snap;Site"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0008 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0008">
+        <rdfs:label xml:lang="en">has_locus</rdfs:label>
+        <owl:inverseOf rdf:resource="#ALIGN_0006"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0009 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0009">
+        <rdfs:label xml:lang="en">has_letter</rdfs:label>
+        <rdfs:range rdf:resource="#ALIGN_0014"/>
+        <rdfs:domain rdf:resource="#seq_0001"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0010 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0010">
+        <rdfs:label xml:lang="en">is_letter_of</rdfs:label>
+        <owl:inverseOf rdf:resource="#ALIGN_0009"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0011 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0011">
+        <rdfs:label xml:lang="en"
+            >has_alignment_column</rdfs:label>
+        <rdfs:domain rdf:resource="#ALIGN_0001"/>
+        <rdfs:range rdf:resource="#ALIGN_0012"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0016 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0016">
+        <rdfs:label xml:lang="en"
+            >is_alignment_column_of</rdfs:label>
+        <owl:inverseOf rdf:resource="#ALIGN_0011"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0017 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0017">
+        <rdfs:label xml:lang="en"
+            >aligns_character</rdfs:label>
+        <rdfs:domain rdf:resource="#ALIGN_0012"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&snap;MaterialEntity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&OBO_REL;bearer_of"/>
+                        <owl:someValuesFrom>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&obo;OBI_0000294"/>
+                                <owl:someValuesFrom rdf:resource="#ALIGN_0014"/>
+                            </owl:Restriction>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0022 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0022">
+        <rdfs:label xml:lang="en"
+            >has_concrete_sequence</rdfs:label>
+        <rdfs:range rdf:resource="&SO;SO_0001411"/>
+        <rdfs:domain rdf:resource="#seq_0001"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0023 -->
+
+    <owl:ObjectProperty rdf:about="#ALIGN_0023">
+        <rdfs:label xml:lang="en"
+            >is_concrete_sequence_of</rdfs:label>
+        <owl:inverseOf rdf:resource="#ALIGN_0022"/>
+    </owl:ObjectProperty>
     
 
 
@@ -184,6 +337,18 @@
     
 
 
+    <!-- http://purl.org/obo/owl/CHEBI#CHEBI_4705 -->
+
+    <owl:Class rdf:about="&CHEBI;CHEBI_4705"/>
+    
+
+
+    <!-- http://purl.org/obo/owl/PATO#PATO_0001631 -->
+
+    <owl:Class rdf:about="&PATO;PATO_0001631"/>
+    
+
+
     <!-- http://purl.org/obo/owl/PRO#PRO_000010173 -->
 
     <owl:Class rdf:about="&PRO;PRO_000010173">
@@ -213,14 +378,14 @@
         <rdfs:subClassOf rdf:resource="&obo;IAO_0000030"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="#has_alignment_score"/>
-                <owl:someValuesFrom rdf:resource="&xsd;double"/>
+                <owl:onProperty rdf:resource="&obo;OBI_0000312"/>
+                <owl:someValuesFrom rdf:resource="#temp007"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="&obo;OBI_0000312"/>
-                <owl:someValuesFrom rdf:resource="#temp007"/>
+                <owl:onProperty rdf:resource="#has_alignment_score"/>
+                <owl:someValuesFrom rdf:resource="&xsd;double"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en"
@@ -246,19 +411,6 @@
     
 
 
-    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0003 -->
-
-    <owl:Class rdf:about="#ALIGN_0003">
-        <rdfs:label xml:lang="en"
-            >High-quality human MAPT sequence alignments</rdfs:label>
-        <rdfs:subClassOf rdf:resource="#ALIGN_0002"/>
-        <obo:IAO_0000116 xml:lang="en"
-            >&#39;High-quality&#39; is bad, I know -- I want to be able to do greater-than or less-than comparisons on sets of literals (numbers), but I don&#39;t know how to do that in OWL.  -tdanford 11/5/10</obo:IAO_0000116>
-        <rdfs:isDefinedBy rdf:resource="#temp009"/>
-    </owl:Class>
-    
-
-
     <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0005 -->
 
     <owl:Class rdf:about="#ALIGN_0005">
@@ -267,10 +419,166 @@
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#in_alignment"/>
-                <owl:someValuesFrom rdf:resource="#ALIGN_0003"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#ALIGN_0002"/>
+                            <rdf:Description rdf:about="#ALIGN_0019"/>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#seq_0001"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0007 -->
+
+    <owl:Class rdf:about="#ALIGN_0007">
+        <rdfs:label xml:lang="en">DNA locus</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&snap;Site"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo2;contains"/>
+                <owl:someValuesFrom rdf:resource="&CHEBI;CHEBI_4705"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <oboInOwl:hasDefinition xml:lang="en"
+            >A DNA locus is a site that contains a DNA molecule, or a portion of a DNA molecule.</oboInOwl:hasDefinition>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0012 -->
+
+    <owl:Class rdf:about="#ALIGN_0012">
+        <rdfs:label xml:lang="en"
+            >concrete sequence alignment column</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&obo;IAO_0000030"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&OBO_REL;part_of"/>
+                <owl:someValuesFrom rdf:resource="#ALIGN_0001"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0013 -->
+
+    <owl:Class rdf:about="#ALIGN_0013">
+        <rdfs:label xml:lang="en">gap character</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#ALIGN_0014"/>
+        <owl:disjointWith rdf:resource="#ALIGN_0015"/>
+        <rdfs:isDefinedBy>
+            <rdf:Description>
+                <rdfs:label xml:lang="en"
+                    >A letter used to denote a space in an alignment, an alignment column which does not contain a corresponding character from one of the sequences which is in the alignment.</rdfs:label>
+            </rdf:Description>
+        </rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0014 -->
+
+    <owl:Class rdf:about="#ALIGN_0014">
+        <rdfs:label xml:lang="en">character</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&obo;IAO_0000030"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0015 -->
+
+    <owl:Class rdf:about="#ALIGN_0015">
+        <rdfs:label xml:lang="en"
+            >DNA sequence character</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#ALIGN_0014"/>
+        <rdfs:isDefinedBy>
+            <rdf:Description>
+                <rdfs:label xml:lang="en"
+                    >A character which denotes one of the four nucleotides that forms a DNA sequence: typically &#39;A&#39;, &#39;T&#39;, &#39;G&#39;, or &#39;C&#39;, or the lower-case or character-set equivalent forms of these letters.</rdfs:label>
+            </rdf:Description>
+        </rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0018 -->
+
+    <owl:Class rdf:about="#ALIGN_0018">
+        <rdfs:label xml:lang="en"
+            >sequence alignment evaluation process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&obo;OBI_0000011"/>
+        <rdfs:isDefinedBy>
+            <rdf:Description>
+                <rdfs:label xml:lang="en"
+                    >A planned process that acts as a filter on concrete sequence alignments; the process takes as input a single concrete sequence alignment, and only produces that alignment as output if it passes a pre-defined test of quality, accuracy, or statistical significance.  </rdfs:label>
+            </rdf:Description>
+        </rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0019 -->
+
+    <owl:Class rdf:about="#ALIGN_0019">
+        <rdfs:label xml:lang="en"
+            >evaluated concrete sequence alignment</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo;OBI_0000312"/>
+                <owl:someValuesFrom rdf:resource="#ALIGN_0018"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#ALIGN_0001"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0020 -->
+
+    <owl:Class rdf:about="#ALIGN_0020">
+        <rdfs:label xml:lang="en"
+            >sequence prior to</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&PATO;PATO_0001631"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&OBO_REL;inheres_in"/>
+                <owl:someValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&OBO_REL;part_of"/>
+                        <owl:someValuesFrom>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&OBO_REL;bearer_of"/>
+                                <owl:someValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="&obo;OBI_0000294"/>
+                                        <owl:someValuesFrom rdf:resource="#seq_0001"/>
+                                    </owl:Restriction>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <obo:IAO_0000115 xml:lang="en"
+            >A quality of related physical entities inhering in a bearer by virtue of the bearer&#39;s spatial relationship to another entity, where that spatial relationship involves coming before that entity in a sequence (such that the whole of which the two entites form a part bears the concretization of a concrete sequence entity.) </obo:IAO_0000115>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#ALIGN_0021 -->
+
+    <owl:Class rdf:about="#ALIGN_0021">
+        <rdfs:label xml:lang="en"
+            >amino acid sequence character</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#ALIGN_0014"/>
     </owl:Class>
     
 
@@ -300,6 +608,12 @@
         <rdfs:label xml:lang="en"
             >concrete sequence entity</rdfs:label>
         <rdfs:subClassOf rdf:resource="&obo;IAO_0000030"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&obo2;has_part"/>
+                <owl:someValuesFrom rdf:resource="#ALIGN_0014"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="&obo;IAO_0000219"/>
@@ -335,6 +649,18 @@
     
 
 
+    <!-- http://www.ifomis.org/bfo/1.1/snap#MaterialEntity -->
+
+    <owl:Class rdf:about="&snap;MaterialEntity"/>
+    
+
+
+    <!-- http://www.ifomis.org/bfo/1.1/snap#Site -->
+
+    <owl:Class rdf:about="&snap;Site"/>
+    
+
+
     <!-- http://www.w3.org/2002/07/owl#Thing -->
 
     <owl:Class rdf:about="&owl;Thing"/>
@@ -349,6 +675,33 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#genid1289512196482520000 -->
+
+    <rdf:Description>
+        <rdfs:label xml:lang="en"
+            >A letter used to denote a space in an alignment, an alignment column which does not contain a corresponding character from one of the sequences which is in the alignment.</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#genid1289512305901081000 -->
+
+    <rdf:Description>
+        <rdfs:label xml:lang="en"
+            >A character which denotes one of the four nucleotides that forms a DNA sequence: typically &#39;A&#39;, &#39;T&#39;, &#39;G&#39;, or &#39;C&#39;, or the lower-case or character-set equivalent forms of these letters.</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#genid1289515470214581000 -->
+
+    <rdf:Description>
+        <rdfs:label xml:lang="en"
+            >A planned process that acts as a filter on concrete sequence alignments; the process takes as input a single concrete sequence alignment, and only produces that alignment as output if it passes a pre-defined test of quality, accuracy, or statistical significance.  </rdfs:label>
+    </rdf:Description>
     
 
 
@@ -422,6 +775,24 @@
     <owl:Thing rdf:about="#temp009">
         <rdfs:label xml:lang="en"
             >A &#39;high-quality&#39; alignment of human MAPT is an alignment whose score passes a minimum threshold defined by [uniprot? someone else?]</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp010 -->
+
+    <owl:Thing rdf:about="#temp010">
+        <rdfs:label xml:lang="en"
+            >A quality that inheres in a concrete sequence alignment by virtue of the judgement of the person (the &#39;aligner&#39;) who caused the alignment process to be run, or who assessed its output.  The quality inheres in a concrete sequence alignment if the aligner decides that the alignment meets a pre-determined statistical threshold of accuracy or significance.</rdfs:label>
+    </owl:Thing>
+    
+
+
+    <!-- http://purl.org/tdanford/2010/10/9/alignments.owl#temp_011 -->
+
+    <owl:Thing rdf:about="#temp_011">
+        <rdfs:label xml:lang="en"
+            >has_locus is a relationship between sites on a molecule and concrete sequence entities for which the site is a biological &#39;locus.&#39;  &#39;X has_locus Y&#39; is equivalent to the property chain &quot;X part_of o contains o bearer_of o is_concretization_of o inv(denotes) o in_alignment o has_aligned_sequence o has_part Y.&quot; </rdfs:label>
     </owl:Thing>
     
 
